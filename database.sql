@@ -1,6 +1,6 @@
-CREATE DATABASE belajar_java_persistence_api;
+CREATE DATABASE java_persistence_api;
 
-USE belajar_java_persistence_api;
+USE java_persistence_api;
 
 CREATE TABLE customers
 (

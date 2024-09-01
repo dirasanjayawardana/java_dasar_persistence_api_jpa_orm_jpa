@@ -32,6 +32,23 @@
 - EntityManager dibuat ketika butuh berinteraksi dengan database, dan setelah selesai perlu untuk menutupnya `close()`
 - untuk membuat EntityManager, menggunakan `entityManagerFactory.createEntityManager()`
 
+## Entity Transaction
+- Saat menggunakan JDBC, secara default operasi ke DB adalah auto commit, sehingga tidak perlu membuat Transaction
+- Namun di JPA, secara default harus menggunakan database transaction saat melakukan operasi manipulasi data entity
+- Transaction di JPA di representasikan dalam interface `EntityTransaction`
+- Untuk membuat EntityTransaction dengan menggunakan `entityManager.getTransaction()`
+- Method dalam EntityTransaction, `begin()`, `commit()`, `rollback()`, `getRollbackOnly()`, `setRollbackOnly()`
+
+## CRUD
+- Untuk melakukan proses CRUD (Create, Read, Update, Delete) ke database, bisa menggunan `EntityManager`
+- Method untuk CRUD pada EntityManager
+- `persist(entity)` untuk menyimpan entity
+- `merge(entity)` untuk mengupdate entity
+- `remove(entity)` untuk menghapus entity
+- `find(Class, id)` untuk mendapatkan entity berdasarkan entity
+
 ## Learning
 - test/EntityManagerFacotryTest.java
 - test/EntityManagerTest.java
+- test/TransactionTest.java
+- test/CrudTest.java
