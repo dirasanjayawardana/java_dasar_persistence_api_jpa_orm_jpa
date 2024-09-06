@@ -13,8 +13,8 @@ public class Customer {
     @Column(name = "name")
     private String name;
 
-    // @Column(name = "primary_email")
-    // private String primaryEmail;
+    @Column(name = "primary_email")
+    private String primaryEmail;
 
     // private Boolean married;
 
@@ -62,9 +62,9 @@ public class Customer {
     //     return primaryEmail;
     // }
 
-    // public void setPrimaryEmail(String primaryEmail) {
-    //     this.primaryEmail = primaryEmail;
-    // }
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
+    }
 
     public String getId() {
         return id;

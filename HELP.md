@@ -47,8 +47,25 @@
 - `remove(entity)` untuk menghapus entity
 - `find(Class, id)` untuk mendapatkan entity berdasarkan entity
 
+## Column
+- Secara default, nama attribute di Class Entity akan dimapping sebagai nama Kolom di Table
+- Untuk custom mapping nama Kolom di attribute Class, menggunakan annotasi `@Column`
+
+## Generated Value
+- Beberapa database memiliki fitur membuat Primary Key secara otomatis, sehingga JPA tidak bisa mengubah Id nya, karena dibuat oleh database
+- Untuk menandai bahwa Id dibuat secara otomatis oleh database, menggunakan annnotation `@GeneratedValue(strategy = GenerationType.TipePrimaryKeyNya)`
+
+## Tipe Data
+- Pastikan tipe data di Class entity sama dengan tipe data di Table. tipe data yg didukung oleh JPA
+- Semua Number (Byte, Short, Integer, Long, Float, Double)
+- Semua Big Number (BigInteger, BigDecimal)
+- Boolean
+- String dan Charracter
+
 ## Learning
 - test/EntityManagerFacotryTest.java
 - test/EntityManagerTest.java
 - test/TransactionTest.java
 - test/CrudTest.java
+- test/ColumnTest.java
+- test/GeneratedValueTest.java

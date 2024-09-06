@@ -10,6 +10,7 @@
 
     <!-- Entity Classes, setiap entity yang dibuat, harus didaftarkan -->
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Customer</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Category</class>
 
     <!-- Konfigurasi untuk koneksi ke database -->
     <properties>
