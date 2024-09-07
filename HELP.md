@@ -69,6 +69,20 @@
 - JPA menyediakan dua strategy untuk menyimpan data Enum, bisa dalam bentuk Integer/Ordinal atau dalam String, disarankan menggunakan strategy String
 - Jika menggunakan String, nama value dari enum akan di simpan sebagai String di database, jika menggunakan Ordinal, value dari enum akan disimpan sebagai Integer sesuai dengan index dari value di enum
 
+## Tipe Data Date and Time
+- Date and Time (Date, Timestamp, Calendar, LocalDate, LocalDateTime, LocalTime, Instant dll)
+- Jika menggunakan `java.util.Date`, disarankan menggunakan annotation `@Temporal(TemporalType)` untuk memberi tahu JPA tipe data yang digunakan, karena `java.util.Date` bisa untuk Date, Time dan Timestamp
+
+## Tipe Data Large Object
+- Terdapat dua jenis Large Object di database, Character Large Object (menampung data text besar) dan Binary Large Object (menampung tipe data Binary besar, seperti gambar, vidio, dll)
+- `java.sql.Clob` Representasi Large Object di JDBC untuk character large object
+- `java.sql.Blob` Representasi Large Object di JDBC untuk binary large object
+- Menggunakan `Clob` dan `Blob` cukup menyulitkan karena harus membaca data menggunakan Java IO
+- Di JPA agar lebih mudah bisa menggunakan `String atau char[]` untuk character large object
+- Dan `byte[]` untuk Binary Large Object
+- Harus menambahkan annotation `@Lob`
+
+
 ## Learning
 - test/EntityManagerFacotryTest.java
 - test/EntityManagerTest.java
@@ -78,3 +92,5 @@
 - test/GeneratedValueTest.java
 - test/DataTypeTest.java
 - test/EnumTest.java
+- test/DateTest.java
+- test/LargeObjectTest.java

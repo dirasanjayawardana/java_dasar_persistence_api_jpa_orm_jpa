@@ -20,28 +20,28 @@ public class Category{
 
     private String description;
 
-    // @Temporal(TemporalType.TIMESTAMP)
-    // @Column(name = "created_at")
-    // private Calendar createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Calendar createdAt;
 
-    // @Column(name = "updated_at")
-    // private LocalDateTime updatedAt;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
-    // public Calendar getCreatedAt() {
-    //     return createdAt;
-    // }
+    public Calendar getCreatedAt() {
+        return createdAt;
+    }
 
-    // public void setCreatedAt(Calendar createdAt) {
-    //     this.createdAt = createdAt;
-    // }
+    public void setCreatedAt(Calendar createdAt) {
+        this.createdAt = createdAt;
+    }
 
-    // public LocalDateTime getUpdatedAt() {
-    //     return updatedAt;
-    // }
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 
-    // public void setUpdatedAt(LocalDateTime updatedAt) {
-    //     this.updatedAt = updatedAt;
-    // }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public String getId() {
         return id;
