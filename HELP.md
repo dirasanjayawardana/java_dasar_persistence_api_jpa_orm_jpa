@@ -61,6 +61,13 @@
 - Semua Big Number (BigInteger, BigDecimal)
 - Boolean
 - String dan Charracter
+- Pastikan menggunakan Tipe Data Non Primitif (Object), karena tipe data di Tabel bisa null
+
+## Tipe Data Enum
+- Jika memiliki Class Entity dengan antribute tipe data Enum, harus memberitahu JPA cara menyimpan Enum tersebut di database
+- Dengan menggunakan annotation `@Enumerated(EnumType.STRING atau EnumType.ORDINAL)`
+- JPA menyediakan dua strategy untuk menyimpan data Enum, bisa dalam bentuk Integer/Ordinal atau dalam String, disarankan menggunakan strategy String
+- Jika menggunakan String, nama value dari enum akan di simpan sebagai String di database, jika menggunakan Ordinal, value dari enum akan disimpan sebagai Integer sesuai dengan index dari value di enum
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -69,3 +76,5 @@
 - test/CrudTest.java
 - test/ColumnTest.java
 - test/GeneratedValueTest.java
+- test/DataTypeTest.java
+- test/EnumTest.java

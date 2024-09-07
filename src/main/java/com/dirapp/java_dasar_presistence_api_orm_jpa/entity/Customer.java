@@ -1,5 +1,7 @@
 package com.dirapp.java_dasar_presistence_api_orm_jpa.entity;
 
+import com.dirapp.java_dasar_presistence_api_orm_jpa.enums.CustomerType;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,12 +18,12 @@ public class Customer {
     @Column(name = "primary_email")
     private String primaryEmail;
 
-    // private Boolean married;
+    private Boolean married;
 
-    // private Byte age;
+    private Byte age;
 
-    // @Enumerated(EnumType.STRING)
-    // private CustomerType type;
+    @Enumerated(EnumType.STRING)
+    private CustomerType type;
 
     // @Transient
     // private String fullName;
@@ -34,29 +36,29 @@ public class Customer {
     //     this.fullName = fullName;
     // }
 
-    // public CustomerType getType() {
-    //     return type;
-    // }
+    public CustomerType getType() {
+        return type;
+    }
 
-    // public void setType(CustomerType type) {
-    //     this.type = type;
-    // }
+    public void setType(CustomerType type) {
+        this.type = type;
+    }
 
-    // public Boolean getMarried() {
-    //     return married;
-    // }
+    public Boolean getMarried() {
+        return married;
+    }
 
-    // public void setMarried(Boolean married) {
-    //     this.married = married;
-    // }
+    public void setMarried(Boolean married) {
+        this.married = married;
+    }
 
-    // public Byte getAge() {
-    //     return age;
-    // }
+    public Byte getAge() {
+        return age;
+    }
 
-    // public void setAge(Byte age) {
-    //     this.age = age;
-    // }
+    public void setAge(Byte age) {
+        this.age = age;
+    }
 
     // public String getPrimaryEmail() {
     //     return primaryEmail;
