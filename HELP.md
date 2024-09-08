@@ -103,6 +103,20 @@
 - Attribute Collection harus ditandai dengan annotation `@ElementCollection`
 - Untuk menentukan table mana yg digunakan untuk menyimpan Collection, menggunakan annotation `@CollectionTable`
 - Untuk menentukan kolom mana yg akan diambil datanya di Table Collection, menggunakan annotaion `@Column` seperti biasa
+- Khusus untuk Collection `Map<K, V>`, harus menambahkan annotation `@MapKeyColumn` untuk memberi tahu JPA kolom mana yg menjadi key, dan `@Column` untuk kolom mana yg menjadi value
+- Perlu diperhatikan, Table yang digunakan untuk menyimpan Collection tidak bisa memiliki relasi ke table lain lagi, karena ketika akan melakukan update data, Hibernate akan menghapus data lama, baru dibuat data baru yg di update, sehingga jika ada foreign key dengan Tabel lain, akan terjadi error
+
+## Entity Listener
+- JPA memiliki fitur entity Listener, digunakan untuk membuat sebuah Class Listener, yg nantinya akan dipangiil oleh JPA ketika sebuah operasi terjadi terhadap Entity nya
+- Contoh ketika setiap data diubah, kolom updated_at akan diisi dengan waktu saat ini
+- Macam-macam event yg bisa di Listen:
+- `@PrePersist` (Dieksekusi sebelum melakukan persist/insert entity)
+- `@PostPersist` (Dieksekusi setelah melakukan persist/insert entity)
+- `@PreRemove` (Dieksekusi sebelum melakukan delete entity)
+- `@PostRemove` (Dieksekusi setelah melakukan delete entity)
+- `@PreUpdate` (Dieksekusi sebelum melakukan update entity)
+- `@PostUpdate` (Dieksekusi setelah melakukan update entity)
+- `@PostLoad` (Dieksekusi setelah melakukan load entity)
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -116,3 +130,4 @@
 - test/DateTest.java
 - test/LargeObjectTest.java
 - test/EmbeddedTest.java
+- test/CollectionTest.java

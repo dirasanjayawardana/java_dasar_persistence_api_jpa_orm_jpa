@@ -18,16 +18,16 @@ public class Member {
     @Embedded
     private Name name;
 
-    // @ElementCollection
-    // @CollectionTable(name = "hobbies", joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
-    // @Column(name = "name")
-    // private List<String> hobbies;
+    @ElementCollection
+    @CollectionTable(name = "hobbies", joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
+    @Column(name = "name")
+    private List<String> hobbies;
 
-    // @ElementCollection
-    // @CollectionTable(name = "skills", joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
-    // @MapKeyColumn(name = "name")
-    // @Column(name = "value")
-    // private Map<String, Integer> skills;
+    @ElementCollection
+    @CollectionTable(name = "skills", joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
+    @MapKeyColumn(name = "name")
+    @Column(name = "value")
+    private Map<String, Integer> skills;
 
     // @Transient
     // private String fullName;
@@ -46,21 +46,21 @@ public class Member {
     //     this.fullName = fullName;
     // }
 
-    // public Map<String, Integer> getSkills() {
-    //     return skills;
-    // }
+    public Map<String, Integer> getSkills() {
+        return skills;
+    }
 
-    // public void setSkills(Map<String, Integer> skills) {
-    //     this.skills = skills;
-    // }
+    public void setSkills(Map<String, Integer> skills) {
+        this.skills = skills;
+    }
 
-    // public List<String> getHobbies() {
-    //     return hobbies;
-    // }
+    public List<String> getHobbies() {
+        return hobbies;
+    }
 
-    // public void setHobbies(List<String> hobbies) {
-    //     this.hobbies = hobbies;
-    // }
+    public void setHobbies(List<String> hobbies) {
+        this.hobbies = hobbies;
+    }
 
     public Integer getId() {
         return id;
