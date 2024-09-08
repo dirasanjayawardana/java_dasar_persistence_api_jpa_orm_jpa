@@ -8,9 +8,11 @@
     <!-- JPA Provider yang digunakan (disini menggunakan Hibernate) -->
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <!-- Entity Classes, setiap entity yang dibuat, harus didaftarkan -->
+    <!-- Entity Classes, setiap entity yang dibuat, sangat disarankan didaftarkan, agar entity dibaca diawal, sehingga proses koneksi ke Table database lebih cepat -->
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Customer</class>
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Category</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Image</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Member</class>
 
     <!-- Konfigurasi untuk koneksi ke database -->
     <properties>

@@ -82,6 +82,27 @@
 - Dan `byte[]` untuk Binary Large Object
 - Harus menambahkan annotation `@Lob`
 
+## Transient
+- Semua attribute di Class Entity secara default akan dianggap sebagai kolom di Table
+- Jika ingin membuat attribute di Class Entity, namun tidak dianggap sebagai kolom di Table, bisa gunakan annotation `@Transient`
+
+## Embedded
+- Di JPA ada sebuah fitur Embedded, untuk menambahkan attribute berupa Class lain, namun tetap mapping ke table yang sama
+- Untuk menandai sebuah Class sebagai Class Embedded yg bisa digunakan sebagai attribute di Class Entity (Embedded Attribute), maka harus menambahkan annotation `@Embeddable` di Class Embedded nya, dan annotation `@Embedded` di attribute Class Entity nya
+- Kemudian isi attribute pada Class Embedded tersebut, bisa tambahkan annotation `@Column` seperti biasa
+- Bisa dikatakan fitur Embedded ini berguna untuk melakukan grouping beberapa attribute column, kemudian disimpan di dalam Class Embedded terpisah
+
+## Embedded ID
+- Jika ingin membuat attribute Id (pirmary key) lebih dari satu attribute di Class Entity, maka harus menggunakan Class Embedded
+- Dan untuk menandai bahwa attribute tersebut adalah Id, menggunakan annotation `@EmbeddedId`
+- Khusus untuk Class Embedded untuk primary key, direkomendasikan implements Serializable
+
+## Collection
+- Ketika membuat attribute dalam bentuk Collection, ini merupakan representasi dari relasi OneToMany pada Table
+- Untuk kasus yg sangat sederhana, bisa membuat attribute dengan tipe collection yang secara otomatis menggunakan Table Join untuk mengambil datanya
+- Attribute Collection harus ditandai dengan annotation `@ElementCollection`
+- Untuk menentukan table mana yg digunakan untuk menyimpan Collection, menggunakan annotation `@CollectionTable`
+- Untuk menentukan kolom mana yg akan diambil datanya di Table Collection, menggunakan annotaion `@Column` seperti biasa
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -94,3 +115,4 @@
 - test/EnumTest.java
 - test/DateTest.java
 - test/LargeObjectTest.java
+- test/EmbeddedTest.java

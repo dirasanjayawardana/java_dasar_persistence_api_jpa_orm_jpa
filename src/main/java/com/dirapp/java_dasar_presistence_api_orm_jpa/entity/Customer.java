@@ -25,16 +25,16 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private CustomerType type;
 
-    // @Transient
-    // private String fullName;
+    @Transient
+    private String fullName;
 
-    // public String getFullName() {
-    //     return fullName;
-    // }
+    public String getFullName() {
+        return fullName;
+    }
 
-    // public void setFullName(String fullName) {
-    //     this.fullName = fullName;
-    // }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public CustomerType getType() {
         return type;
@@ -60,9 +60,9 @@ public class Customer {
         this.age = age;
     }
 
-    // public String getPrimaryEmail() {
-    //     return primaryEmail;
-    // }
+    public String getPrimaryEmail() {
+        return primaryEmail;
+    }
 
     public void setPrimaryEmail(String primaryEmail) {
         this.primaryEmail = primaryEmail;

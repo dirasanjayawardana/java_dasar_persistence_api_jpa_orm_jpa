@@ -21,7 +21,7 @@ public class ColumnTest {
         customer.setId("2");
         customer.setName("Dira");
         customer.setPrimaryEmail("contoh@example.com");
-        // customer.setFullName("Dira Sanjaya Wardana");
+        customer.setFullName("Dira Sanjaya Wardana");
 
         entityManager.persist(customer);
 
@@ -40,7 +40,7 @@ public class ColumnTest {
         customer.setId("3");
         customer.setName("Dira");
         customer.setPrimaryEmail("contoh@example.com");
-        // customer.setFullName("Dira Sanjaya Wardana");
+        customer.setFullName("Dira Sanjaya Wardana");
 
         entityManager.persist(customer);
 

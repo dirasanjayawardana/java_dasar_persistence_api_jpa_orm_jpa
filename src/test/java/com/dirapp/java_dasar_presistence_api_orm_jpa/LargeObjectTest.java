@@ -27,7 +27,7 @@ public class LargeObjectTest {
 
     // byte[] bytes = Files.readAllBytes(Path.of(getClass().getResource("/images/sample.png").getPath()));
     byte[] bytes = Files.readAllBytes(Path.of("src/main/resources/images/sample.png"));
-
+    
     image.setImage(bytes);
 
     entityManager.persist(image);
