@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
+import com.dirapp.java_dasar_presistence_api_orm_jpa.listener.UpdatedAtListener;
+
 @Entity
 @Table(name = "categories")
-// @EntityListeners({
-//         UpdatedAtListener.class
-// })
-public class Category{
+@EntityListeners({
+        UpdatedAtListener.class
+})
+public class Category implements UpdatedAtAware {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

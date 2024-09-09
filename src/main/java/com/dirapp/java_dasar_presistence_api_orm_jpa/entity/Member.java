@@ -29,22 +29,22 @@ public class Member {
     @Column(name = "value")
     private Map<String, Integer> skills;
 
-    // @Transient
-    // private String fullName;
+    @Transient
+    private String fullName;
 
-    // @PostLoad
-    // public void postLoad() {
-    //     fullName = name.getTitle() + ". " + name.getFirstName() + " " + name.getMiddleName()
-    //             + " " + name.getLastName();
-    // }
+    @PostLoad
+    public void postLoad() {
+        fullName = name.getTitle() + ". " + name.getFirstName() + " " + name.getMiddleName()
+                + " " + name.getLastName();
+    }
 
-    // public String getFullName() {
-    //     return fullName;
-    // }
+    public String getFullName() {
+        return fullName;
+    }
 
-    // public void setFullName(String fullName) {
-    //     this.fullName = fullName;
-    // }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public Map<String, Integer> getSkills() {
         return skills;

@@ -117,6 +117,18 @@
 - `@PreUpdate` (Dieksekusi sebelum melakukan update entity)
 - `@PostUpdate` (Dieksekusi setelah melakukan update entity)
 - `@PostLoad` (Dieksekusi setelah melakukan load entity)
+- Kemudian menambahkan annotation `@EntityListeners(ClassListenerNya.Class)` pada Class Entity untuk melisten event, dan akan mengeksekusi Class Listener
+- Perlu membuat interface untuk di implement di Class Entity dan dijadikan parameter di method yang akan dieksekusi di Class Listener
+- Jika tidak ingin membuat Class Listener, bisa langsung menambahkan listener langsung di dalam Class Entity, namun kekurangannya, Listener tidak bisa digunakan di Class Entity lain
+
+## One to One Relationship
+- Merupkan relasi dimana satu tabel berelasi dengan satu data di tabel lain
+- Ada beberapa cara melakukan relasi, dengan Foreign Key atau dengan Primary Key yang sama
+- JPA mendukung relasi menggunakan Foreign Key ataupun Primary Key yang sama
+- Untuk menambahkan attribut di Entity yg berelasi dengan Entity lain, menggunakan annotation `@OneToOne`
+- Untuk memberi tahu JPA tentang kolom mana yang digunakan untuk melakukan JOIN Foreign Key, menggunakan annotation `@JoinColumn(name = "kolomForeignKey", referencedColumnName = "referenceKolomIdDiEntityLain")`, anotasi ini diletakkan di Entity yg memiliki Foreign Key Kolom, dan Entity relasi cukup tambahkan `@OneToOne(mappedBy = "namaAttributeForeignDiEntityLain")`
+- Jika JOIN menggunakan Primary Key yang sama, menggunakan annotation `@PrimaryKeyJoinColumn(name = "kolomPrimaryKeyDiEntitiyIni", referencedColumnName = "kolomPrimaryKeyDiEntityLain")` 
+- Untuk attribute di Entity lain yg menjadi relasi, menambahkan annotation `@OneToOne(mappedBy = "namaAttributeForeignDiEntityLain")`
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -131,3 +143,5 @@
 - test/LargeObjectTest.java
 - test/EmbeddedTest.java
 - test/CollectionTest.java
+- test/EntityListenerTest.java
+- test/EntityRelationshipTest.java
