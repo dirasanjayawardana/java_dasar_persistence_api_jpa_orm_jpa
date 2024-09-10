@@ -130,6 +130,17 @@
 - Jika JOIN menggunakan Primary Key yang sama, menggunakan annotation `@PrimaryKeyJoinColumn(name = "kolomPrimaryKeyDiEntitiyIni", referencedColumnName = "kolomPrimaryKeyDiEntityLain")` 
 - Untuk attribute di Entity lain yg menjadi relasi, menambahkan annotation `@OneToOne(mappedBy = "namaAttributeForeignDiEntityLain")`
 
+## One To Many Relationship
+- Untuk membuat atribut di Entity memiliki relasi OneToMany dengan Entity lain, menggunakan `@OneToMany(mappedBy = "namaAttributeForeignDiEntityLain")`
+- Atribut di Entity tipe datanya harus dibungkus dalam collection, seperti `List<T>` atau `Set<T>`
+- Relasi OneToMany jika dilihat dari Entity sebaliknya adalah relasi ManyToOne, menggunakan `@ManyToOne` dan harus menambahkan `@JoinColumn(name = "kolomForeignKey", referencedColumnName = "referenceKolomIdDiEntityLain")`
+
+## Many To Many Relationship
+- Pada relasi ManyToMany, butuh tabel tambahan ditengah sebagai jembatan, oleh karena itu, menggunakan `@JoinTable`
+- Untuk table yg ditengah sebagai jembatan, tidak butuh membuat Class Entity nya
+- Untuk menambahkan atribut yg memiliki relasi ManyToMany, menggunakan `@ManyToMany` dan `@JoinTable`
+- Untuk atrbut pada Class Entity sebaliknya, cukup gunakan `@OneToMany(mappedBy = "namaAttributeForeignDiEntityLain")`
+
 ## Learning
 - test/EntityManagerFacotryTest.java
 - test/EntityManagerTest.java

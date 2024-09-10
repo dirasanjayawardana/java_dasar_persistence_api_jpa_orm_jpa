@@ -6,7 +6,9 @@ import jakarta.persistence.EntityTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Brand;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Credential;
+import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Product;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.User;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Wallet;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.util.JpaUtil;
@@ -74,95 +76,117 @@ public class EntityRelationshipTest {
         entityManager.close();
     }
 
-    // @Test
-    // void oneToManyInsert() {
-    //     EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
-    //     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    //     EntityTransaction entityTransaction = entityManager.getTransaction();
-    //     entityTransaction.begin();
+    @Test
+    void oneToManyInsert() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
-    //     Brand brand = new Brand();
-    //     brand.setId("samsung");
-    //     brand.setName("Samsung");
-    //     entityManager.persist(brand);
+        Brand brand = new Brand();
+        brand.setId("samsung");
+        brand.setName("Samsung");
+        entityManager.persist(brand);
 
-    //     Product product1 = new Product();
-    //     product1.setId("p1");
-    //     product1.setName("Samsung Galaxy 1");
-    //     product1.setBrand(brand);
-    //     product1.setPrice(1_000_000L);
-    //     entityManager.persist(product1);
+        Product product1 = new Product();
+        product1.setId("p1");
+        product1.setName("Samsung Galaxy 1");
+        product1.setBrand(brand);
+        product1.setPrice(1_000_000L);
+        entityManager.persist(product1);
 
-    //     Product product2 = new Product();
-    //     product2.setId("p2");
-    //     product2.setName("Samsung Galaxy 2");
-    //     product2.setBrand(brand);
-    //     product2.setPrice(2_000_000L);
-    //     entityManager.persist(product2);
+        Product product2 = new Product();
+        product2.setId("p2");
+        product2.setName("Samsung Galaxy 2");
+        product2.setBrand(brand);
+        product2.setPrice(2_000_000L);
+        entityManager.persist(product2);
 
-    //     entityTransaction.commit();
-    //     entityManager.close();
-    // }
+        entityTransaction.commit();
+        entityManager.close();
+    }
 
-    // @Test
-    // void oneToManyFind() {
-    //     EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
-    //     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    //     EntityTransaction entityTransaction = entityManager.getTransaction();
-    //     entityTransaction.begin();
+    @Test
+    void oneToManyFind() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
-    //     Brand brand = entityManager.find(Brand.class, "samsung");
-    //     Assertions.assertNotNull(brand.getProducts());
-    //     Assertions.assertEquals(2, brand.getProducts().size());
+        Brand brand = entityManager.find(Brand.class, "samsung");
+        Assertions.assertNotNull(brand.getProducts());
+        Assertions.assertEquals(2, brand.getProducts().size());
 
-    //     brand.getProducts().forEach(product -> System.out.println(product.getName()));
+        brand.getProducts().forEach(product -> System.out.println(product.getName()));
 
-    //     entityTransaction.commit();
-    //     entityManager.close();
-    // }
+        entityTransaction.commit();
+        entityManager.close();
+    }
+    
+    @Test
+    void oneToManyUpdate() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
-    // @Test
-    // void manyToManyInsert() {
-    //     EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
-    //     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    //     EntityTransaction entityTransaction = entityManager.getTransaction();
-    //     entityTransaction.begin();
+        Brand brand = entityManager.find(Brand.class, "samsung");
+        Assertions.assertNotNull(brand.getProducts());
+        Assertions.assertEquals(2, brand.getProducts().size());
 
-    //     User user = entityManager.find(User.class, "dira");
-    //     user.setLikes(new HashSet<>());
+        brand.getProducts().forEach(product ->{
+            product.setName("samsung123");
+        });
+        brand.getProducts().getFirst().setDescription("contoh deskripsi");
 
-    //     Product product1 = entityManager.find(Product.class, "p1");
-    //     Product product2 = entityManager.find(Product.class, "p2");
+        entityManager.merge(brand);
 
-    //     user.getLikes().add(product1);
-    //     user.getLikes().add(product2);
+        entityTransaction.commit();
+        entityManager.close();
+    }
 
-    //     entityManager.merge(user);
+    @Test
+    void manyToManyInsert() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
-    //     entityTransaction.commit();
-    //     entityManager.close();
-    // }
+        User user = entityManager.find(User.class, "dira");
+        user.setLikes(new HashSet<>());
 
-    // @Test
-    // void manyToManyUpdate() {
-    //     EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
-    //     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    //     EntityTransaction entityTransaction = entityManager.getTransaction();
-    //     entityTransaction.begin();
+        Product product1 = entityManager.find(Product.class, "p1");
+        Product product2 = entityManager.find(Product.class, "p2");
 
-    //     User user = entityManager.find(User.class, "dira");
-    //     Product product = null;
-    //     for (Product item : user.getLikes()) {
-    //         product = item;
-    //         break;
-    //     }
+        user.getLikes().add(product1);
+        user.getLikes().add(product2);
 
-    //     user.getLikes().remove(product);
-    //     entityManager.merge(user);
+        entityManager.merge(user);
 
-    //     entityTransaction.commit();
-    //     entityManager.close();
-    // }
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void manyToManyUpdate() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        User user = entityManager.find(User.class, "dira");
+        Product product = null;
+        for (Product item : user.getLikes()) {
+            product = item;
+            break;
+        }
+
+        user.getLikes().remove(product);
+        entityManager.merge(user);
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
 
     // @Test
     // void fetch() {
