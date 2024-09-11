@@ -141,6 +141,40 @@
 - Untuk menambahkan atribut yg memiliki relasi ManyToMany, menggunakan `@ManyToMany` dan `@JoinTable`
 - Untuk atrbut pada Class Entity sebaliknya, cukup gunakan `@OneToMany(mappedBy = "namaAttributeForeignDiEntityLain")`
 
+## Fetch
+- Secara default, beberapa jenis relasi memiliki value fetch EAGER, artinya saat melakukan find Entity, akan otomatis JOIN, walaupun tidak membutuhkan relasinya
+- Kebalikan dari EAGER adalah LAZY, dimana artinya relasi akan di QUERY secara terpisah (tidak di JOIN) ketika memanggil attributenya saja, jika tidak, maka tidak akan di QUERY
+- `OneToOne` default fetchnya EAGER
+- `OneToMany` default fetchnya LAZY
+- `ManyToOne` default fetchnya EAGER
+- `ManyToMany` default fetchnya LAZY
+- Untuk mengubah nilai fetch dari relasi, dengan menambahkan attribute `fetch = FetchType.TIPENYA` pada anotasi relasinya
+
+## IS-A Relationship
+- IS-A biasanya digunakan untuk mendukung konsep pewarisan di relational database, yg notabanenya tidak mendukung koonsep ini
+- Contohnya struktur table Employee, memiliki detail Manager, VicePresident, Supervisor, dll
+- IS-A Relationship jika dalam OOP, maka implementasinya adalah berupa Inheritance/Pewarisan
+- IS-A memiliki beberapa cara impementasi (strategy) di table nya, yaitu
+- `Single Table Inheritance`
+- `Joined Table Inheritance`
+- `Table Per Class Inheritance`
+
+## Parent Entity
+- Saat membuat Entity untuk IS-A Relationship, harus membuat parent Entity nya terlebih dahulu
+- Parent Entity berisikan attribute yang tersedia di semua Child Entity nya
+- Harus menyebutkan Strategy inheritance, menggunakan annotation `@Inheritance(strategy = InheritanceType.TIPENYA)`
+
+## Child Entity
+- Untuk Child Entity harus extends class Parent Entity nya
+- `@DiscriminatorColumn` untuk memberi tahu JPA kolom mana yg menampung tipe Entity nya, ini di tambahkan di Entity Parentnya
+- `@DiscriminatorValue` untuk menentukan value tipe Entity dari sebuah Entity
+
+## Single Table Inheritance
+- Single Table Inheritance artinya menyimpan seluruh Entity untuk relasi IS-A dalam satu table
+- Artinya semua kolom di Entity akan digabung dalam satu table
+- Kelebihan dari strategy ini adalah mudah dan cepat, tidak butuh melakukan JOIN
+- Kekurangannya adalah harus membuat semua kolom menjadi nullable, karena tiap record hanya memiliki dari Entity
+
 ## Learning
 - test/EntityManagerFacotryTest.java
 - test/EntityManagerTest.java

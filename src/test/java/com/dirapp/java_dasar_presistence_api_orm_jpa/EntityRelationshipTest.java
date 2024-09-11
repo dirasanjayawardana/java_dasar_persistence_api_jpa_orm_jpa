@@ -122,7 +122,7 @@ public class EntityRelationshipTest {
         entityTransaction.commit();
         entityManager.close();
     }
-    
+
     @Test
     void oneToManyUpdate() {
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
@@ -134,7 +134,7 @@ public class EntityRelationshipTest {
         Assertions.assertNotNull(brand.getProducts());
         Assertions.assertEquals(2, brand.getProducts().size());
 
-        brand.getProducts().forEach(product ->{
+        brand.getProducts().forEach(product -> {
             product.setName("samsung123");
         });
         brand.getProducts().getFirst().setDescription("contoh deskripsi");
@@ -188,20 +188,20 @@ public class EntityRelationshipTest {
         entityManager.close();
     }
 
-    // @Test
-    // void fetch() {
-    //     EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
-    //     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    //     EntityTransaction entityTransaction = entityManager.getTransaction();
-    //     entityTransaction.begin();
+    @Test
+    void fetch() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
-    //     Product product = entityManager.find(Product.class, "p1");
-    //     Brand brand = product.getBrand();
-    //     brand.getName();
-    //     Assertions.assertNotNull(brand);
-    //     // Brand brand = entityManager.find(Brand.class, "samsung");
+        Product product = entityManager.find(Product.class, "p1");
+        Brand brand = product.getBrand();
+        brand.getName();
+        Assertions.assertNotNull(brand);
+        // Brand brand = entityManager.find(Brand.class, "samsung");
 
-    //     entityTransaction.commit();
-    //     entityManager.close();
-    // }
+        entityTransaction.commit();
+        entityManager.close();
+    }
 }
