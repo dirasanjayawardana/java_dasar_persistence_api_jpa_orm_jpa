@@ -13,6 +13,21 @@
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Category</class>
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Image</class>
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Member</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Department</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Brand</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Credential</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Product</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.User</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Wallet</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Employee</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Manager</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.VicePresident</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Payment</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.PaymentCreditCard</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.PaymentGopay</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Transaction</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.TransactionCredit</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.TransactionDebit</class>
 
     <!-- Konfigurasi untuk koneksi ke database -->
     <properties>

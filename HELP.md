@@ -159,21 +159,30 @@
 - `Joined Table Inheritance`
 - `Table Per Class Inheritance`
 
-## Parent Entity
-- Saat membuat Entity untuk IS-A Relationship, harus membuat parent Entity nya terlebih dahulu
-- Parent Entity berisikan attribute yang tersedia di semua Child Entity nya
-- Harus menyebutkan Strategy inheritance, menggunakan annotation `@Inheritance(strategy = InheritanceType.TIPENYA)`
-
-## Child Entity
-- Untuk Child Entity harus extends class Parent Entity nya
-- `@DiscriminatorColumn` untuk memberi tahu JPA kolom mana yg menampung tipe Entity nya, ini di tambahkan di Entity Parentnya
-- `@DiscriminatorValue` untuk menentukan value tipe Entity dari sebuah Entity
-
 ## Single Table Inheritance
 - Single Table Inheritance artinya menyimpan seluruh Entity untuk relasi IS-A dalam satu table
 - Artinya semua kolom di Entity akan digabung dalam satu table
 - Kelebihan dari strategy ini adalah mudah dan cepat, tidak butuh melakukan JOIN
 - Kekurangannya adalah harus membuat semua kolom menjadi nullable, karena tiap record hanya memiliki dari Entity
+### Parent Entity
+- Saat membuat Entity untuk IS-A Relationship, harus membuat parent Entity nya terlebih dahulu
+- Parent Entity berisikan attribute yang tersedia di semua Child Entity nya
+- Harus menyebutkan Strategy inheritance, menggunakan annotation `@Inheritance(strategy = InheritanceType.SINGLE_TABLE)`
+### Child Entity
+- Untuk Child Entity harus extends class Parent Entity nya
+- `@DiscriminatorColumn` untuk memberi tahu JPA kolom mana yg menampung tipe Entity nya, ini di tambahkan di Entity Parentnya
+- `@DiscriminatorValue` untuk menentukan value tipe Entity dari sebuah Entity
+
+## Joined Table Inheritance
+- Tiap Child Entity memiliki table masing-masing, namun akan melakukan join primary key dengan table Parent Entity
+- Tidak perlu menggunakan Discriminator Column lagi, karena datanya sudah terpisah table
+- Harus menyebutkan Strategy inheritance pada Parentnya, menggunakan annotation `@Inheritance(strategy = InheritanceType.JOINED)`
+
+## Table Per Class Inheritance
+- Tiap Entity akan dibuatkan table masing-masing, artinya Parent Entity dan Child Entity akan memiliki table masing-masing
+- Strategi ini mirip seperti JOIN, namun tiap table menyimpan full kolom, sehingga tidak perlu JOIN
+- Perlu diperhatikan, saat melakukan find menggunakan Parent Entity, akan sangat lambat karena harus SELECT from SELECT
+- Harus menyebutkan Strategy inheritance pada Parentnya, menggunakan annotation `@Inheritance(strategy = InheritanceType.TABLEE_PER_CLASS)`
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -190,3 +199,4 @@
 - test/CollectionTest.java
 - test/EntityListenerTest.java
 - test/EntityRelationshipTest.java
+- test/InheritanceTest.java
