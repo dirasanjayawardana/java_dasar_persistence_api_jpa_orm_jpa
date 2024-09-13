@@ -28,6 +28,7 @@
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Transaction</class>
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.TransactionCredit</class>
     <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.TransactionDebit</class>
+    <class>com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.AuditableEntity</class>
 
     <!-- Konfigurasi untuk koneksi ke database -->
     <properties>

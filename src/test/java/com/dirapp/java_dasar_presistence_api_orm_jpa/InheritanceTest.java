@@ -6,6 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Brand;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Employee;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Manager;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.is_a.Payment;
@@ -177,22 +178,22 @@ public class InheritanceTest {
         entityManager.close();
     }
 
-    // @Test
-    // void mappedSuperclass() {
-    //     EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
-    //     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    //     EntityTransaction entityTransaction = entityManager.getTransaction();
-    //     entityTransaction.begin();
+    @Test
+    void mappedSuperclass() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
-    //     Brand brand = new Brand();
-    //     brand.setId("xiaomi");
-    //     brand.setName("Xiaomi");
-    //     brand.setDescription("Xiaomi Global");
-    //     brand.setCreatedAt(LocalDateTime.now());
-    //     brand.setUpdatedAt(LocalDateTime.now());
-    //     entityManager.persist(brand);
+        Brand brand = new Brand();
+        brand.setId("xiaomi");
+        brand.setName("Xiaomi");
+        brand.setDescription("Xiaomi Global");
+        brand.setCreatedAt(LocalDateTime.now());
+        brand.setUpdatedAt(LocalDateTime.now());
+        entityManager.persist(brand);
 
-    //     entityTransaction.commit();
-    //     entityManager.close();
-    // }
+        entityTransaction.commit();
+        entityManager.close();
+    }
 }

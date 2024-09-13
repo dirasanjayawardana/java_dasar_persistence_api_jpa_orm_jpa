@@ -184,6 +184,17 @@
 - Perlu diperhatikan, saat melakukan find menggunakan Parent Entity, akan sangat lambat karena harus SELECT from SELECT
 - Harus menyebutkan Strategy inheritance pada Parentnya, menggunakan annotation `@Inheritance(strategy = InheritanceType.TABLEE_PER_CLASS)`
 
+## Mapped Superclass
+- Pada kasus OOP, biasanya membuat Parent Class sebagai class yang berisikan attribute-attribute yang sama untuk di gunakan di setiap Class yg extend
+- Pada kasus Entity, bisa membuat Parent Class juga yang berisi attribute-attribute yg bisa digunakan di Entity lain, perlu menambahkan annotation `@MappedSuperclass` untuk memberi tahu ini hanya sebuah Parent Class tetapi bukan IS-A Relationship
+
+## Locking
+- Locking adalah aksi untuk mencegah data berubah dalam jeda waktu saat data sedang dibaca atau sedang digunakan
+- Terdapat dua jenis Locking, `Optimistic` dan `Pessimistic`
+- `Optimistic Locking` adalah proses multiple transaksi, dimana tiap transaksi tidak melakukan lock terhadap data, namun sebelum melakukan commit, tiap transaksi akan mengecek terlebih dahulu apakah data sudah berubah atau belum, jika sudah berubah karena transaksi lain, maka transaksi tersebut akan di rollback
+- `Pessimistic Locking` adalah proses multiple transaksi, dimana tiap transaksi akan melakukan locking terhadap data yang digunakan, sehingga tiap transaksi harus menunggu data yang akan digunakan jika data tersebut sedang di lock oleh transaksi lain
+- `Optimistic Locking` lebih cepat karena tidak perlu melakukan lock data, namun akan sering melakukan rollback jika ternyata data yg dicommit sudah berubah
+
 ## Learning
 - test/EntityManagerFacotryTest.java
 - test/EntityManagerTest.java

@@ -13,10 +13,7 @@ import java.util.List;
 // @NamedNativeQueries({
 //         @NamedNativeQuery(name = "Brand.native.findAll", query = "select * from brands", resultClass = Brand.class)
 // })
-public class Brand {
-
-    @Id
-    private String Id;
+public class Brand extends AuditableEntity<String> {
 
     private String name;
 
@@ -35,14 +32,6 @@ public class Brand {
     // public void setVersion(Long version) {
     //     this.version = version;
     // }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
-    }
 
 
     public String getName() {
