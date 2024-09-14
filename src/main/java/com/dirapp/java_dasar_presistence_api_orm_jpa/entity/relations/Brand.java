@@ -22,17 +22,16 @@ public class Brand extends AuditableEntity<String> {
     @OneToMany(mappedBy = "brand")
     private List<Product> products;
 
-    // @Version
-    // private Long version;
+    @Version
+    private Long version;
 
-    // public Long getVersion() {
-    //     return version;
-    // }
+    public Long getVersion() {
+        return version;
+    }
 
-    // public void setVersion(Long version) {
-    //     this.version = version;
-    // }
-
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
     public String getName() {
         return name;

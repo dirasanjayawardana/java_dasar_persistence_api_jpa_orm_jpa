@@ -192,8 +192,23 @@
 - Locking adalah aksi untuk mencegah data berubah dalam jeda waktu saat data sedang dibaca atau sedang digunakan
 - Terdapat dua jenis Locking, `Optimistic` dan `Pessimistic`
 - `Optimistic Locking` adalah proses multiple transaksi, dimana tiap transaksi tidak melakukan lock terhadap data, namun sebelum melakukan commit, tiap transaksi akan mengecek terlebih dahulu apakah data sudah berubah atau belum, jika sudah berubah karena transaksi lain, maka transaksi tersebut akan di rollback
-- `Pessimistic Locking` adalah proses multiple transaksi, dimana tiap transaksi akan melakukan locking terhadap data yang digunakan, sehingga tiap transaksi harus menunggu data yang akan digunakan jika data tersebut sedang di lock oleh transaksi lain
 - `Optimistic Locking` lebih cepat karena tidak perlu melakukan lock data, namun akan sering melakukan rollback jika ternyata data yg dicommit sudah berubah
+- Saat menggunakan `Optimistic Locking` harus membuat version column sebagai penanda perubahan yang terjadi di data, bisa berupa version, Number (Integer, Short, Long) dan Timestamp, menggunakan annotation `@Version`, akan diisi otomatis oleh JPA setiap ada perubahan data
+
+- `Pessimistic Locking` adalah proses multiple transaksi, dimana tiap transaksi akan melakukan locking terhadap data yang digunakan, sehingga tiap transaksi harus menunggu data yang akan digunakan jika data tersebut sedang di lock oleh transaksi lain
+- Saat menggunakan `Pessimistic Locking`, perlu menentukan LockModeType nya, dengan menambahkan parameter di `entityManager` saat melakukan manipulasi data, contohnya `entityManager.find(Brand.class, "1", LockModeType.PESSIMISTIC_WRITE)`
+- `NONE` tidak ada lock, `READ / OPTMISITIC` versi entity akan dicek di akhir transaksi sama seperti Optimistic Locking, `WRITE / OPTIMISTIC_FORCE_INCREMENT` versi entity akan dinaikkan secara otomatis walaupun data tidak di update
+- `PESSIMISTIC_FORCE_INCREMENT` entity akan di lock secara pessimistic dan versi akan dinaikkan walau data tidak di update
+- `PESSIMISTIC_READ` entity akan di lock secara pessimistic menggunakan shared lock (jika database mendukung), SELECT FOR SHARE
+- `PESSIMISTIC_WRITE` entity akan di lock secara explicit, SELECT FOR UPDATE
+
+## Managed Entity
+- Saat membuat Object Entity baru (contohnya `new Brand()`) ini adalah Unmanaged Entity
+- Ketika Unmanaged Entity disimpan ke database menggunakan EntityManager, secara otomatis objectnya akan berubah menjadi Managed Entity
+- Setiap perubahan yg terjadi pada Managed Entity, secara otomatis akan diupdate ke database ketika melakukan commit, walaupun tidak melakukan update/merge secara manual
+- Untuk merubah Managed Entity menjadi Unmanaged Entity, menggunakan `entityManager.detach(objectEntityNya)`
+- Life cycle Managed Entity hanya terjadi di dalam transaksi, jika transaksi sudah di commit atau di close, maka semua Managed Entity akan berubah menjadi Unmanaged Entity
+
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -211,3 +226,5 @@
 - test/EntityListenerTest.java
 - test/EntityRelationshipTest.java
 - test/InheritanceTest.java
+- test/LockingTest.java
+- test/ManagedEntityTest.java
