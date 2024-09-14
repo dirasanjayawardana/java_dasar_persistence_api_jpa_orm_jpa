@@ -209,6 +209,22 @@
 - Untuk merubah Managed Entity menjadi Unmanaged Entity, menggunakan `entityManager.detach(objectEntityNya)`
 - Life cycle Managed Entity hanya terjadi di dalam transaksi, jika transaksi sudah di commit atau di close, maka semua Managed Entity akan berubah menjadi Unmanaged Entity
 
+## Schema Generator
+- JPA memiliki fitur untuk membuat tabel otomatis dari Class Entity nya
+- Namun ini sangat tidak disarankan, karena akan sulit untuk tracking perubahan schema database nya, cocok untuk testing saja
+- Lebih baik disarankan menggunakan database versioning sepert `flywaydb`
+- Untuk mengatur fitur Hibernate Schema Generator, bisa menggunakan property `jakarta.persistence.schema-generation.database.action` di file `persistence.xml` dengan value:
+- `none` tidak melakukan apapun
+- `create` membuat schema
+- `drop` menghapus schema
+- `drop-and-create` menghapus dan membuat schema
+
+## JPA Query Language (JPA QL)
+- Untuk melakukan query ke database, JPA memiliki standarisasi Query Language, jadi tidak menggunakan SQL yang spesifik ke database yang digunakan, karena dengan JPA bisa berganti-ganti database yg digunakan
+- Saat menggunakan JPA QL, object yg dihasilkan adalah object dari class `Query` atau `TypedQuery<T>`, mirip seperti PreparedStatement, dimana bisa menambahkan parameter jika JPA QL yang dibuat membutuhkan parameter
+- Jika melakukan query yang sudah jelas Entity nya, sangat disarankan menggunakan `TypedQuery<T>`
+- Untuk melakukan SELECT, tidak menggunakan nama kolom, tetapi menggunakan nama attribute, dan untuk SELECT all tidak menggunakan *, tetapi menggunakan alias nya saja
+
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -228,3 +244,4 @@
 - test/InheritanceTest.java
 - test/LockingTest.java
 - test/ManagedEntityTest.java
+- test/JpaQueryLanguageTest.java
