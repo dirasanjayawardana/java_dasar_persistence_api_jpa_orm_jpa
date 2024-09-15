@@ -74,7 +74,8 @@ public class JpaQueryLangaugeTest {
     }
 
     @Test
-    void joinFetchClause() { // melakukan JOIN sekaligus melakukan SELECT pada semua kolom di tabel termasuk yg di JOIN
+    void joinFetchClause() { // melakukan JOIN sekaligus melakukan SELECT pada semua kolom di tabel termasuk
+                             // yg di JOIN
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -191,15 +192,15 @@ public class JpaQueryLangaugeTest {
     }
 
     @Test
-    void selectNewConstructor() { // untuk melakukan SELECT beberapa kolom saja, namun agar tidak menggunakan Object[]
+    void selectNewConstructor() { // untuk melakukan SELECT beberapa kolom saja, namun agar tidak menggunakan
+                                  // Object[]
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
         TypedQuery<SimpleBrand> query = entityManager.createQuery(
-                "select new com.dirapp.jpa.entity.relations.SimpleBrand(b.id, b.name) " +
-                        "from Brand b where b.name = :name",
+                "select new com.dirapp.jpa.entity.relations.SimpleBrand(CAST(b.id AS string), CAST(b.name AS string)) from Brand b where b.name = :name",
                 SimpleBrand.class);
         query.setParameter("name", "Xiaomi");
 
