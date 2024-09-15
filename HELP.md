@@ -237,7 +237,7 @@
 - JPA QL bisa digunakan untuk membuat perintah Update dan Delete, dengan membuat query seperti biasa
 - Untuk execute query nya menggunakan method `query.executeUpdate()`
 - Bisa digunakan untuk JPA QL maupun Native Query
-- Namun untuk Update dan Delete tetap disarankan menggunakan `merge` dan `remove`
+- Namun untuk Update dan Delete tetap disarankan menggunakan `merge` dan `remove`, karena fitur optimistic locking tidak akan berjalan
 
 
 ## Learning
