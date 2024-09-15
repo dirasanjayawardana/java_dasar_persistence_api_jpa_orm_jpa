@@ -74,8 +74,8 @@ public class JpaQueryLangaugeTest {
     }
 
     @Test
-    void joinFetchClause() { // melakukan JOIN sekaligus melakukan SELECT pada semua kolom di tabel termasuk
-                             // yg di JOIN
+    void joinFetchClause() { 
+        // melakukan JOIN sekaligus melakukan SELECT pada semua kolom di tabel termasuk yg di JOIN
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -192,8 +192,8 @@ public class JpaQueryLangaugeTest {
     }
 
     @Test
-    void selectNewConstructor() { // untuk melakukan SELECT beberapa kolom saja, namun agar tidak menggunakan
-                                  // Object[]
+    void selectNewConstructor() {
+        // untuk melakukan SELECT beberapa kolom saja, namun agar tidak menggunakan Object[]
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -256,6 +256,7 @@ public class JpaQueryLangaugeTest {
         entityManager.close();
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     void nativeQuery() {
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
@@ -275,6 +276,7 @@ public class JpaQueryLangaugeTest {
         entityManager.close();
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     void namedNativeQuery() {
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();

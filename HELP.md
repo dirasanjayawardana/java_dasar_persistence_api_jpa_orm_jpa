@@ -219,10 +219,11 @@
 - `drop` menghapus schema
 - `drop-and-create` menghapus dan membuat schema
 
-## JPA Query Language (JPA QL)
+## JPA Query Language (JPA QL/JPQL)
 - Untuk melakukan query ke database, JPA memiliki standarisasi Query Language, jadi tidak menggunakan SQL yang spesifik ke database yang digunakan, karena dengan JPA bisa berganti-ganti database yg digunakan
 - Saat menggunakan JPA QL, object yg dihasilkan adalah object dari class `Query` atau `TypedQuery<T>`, mirip seperti PreparedStatement, dimana bisa menambahkan parameter jika JPA QL yang dibuat membutuhkan parameter
 - Jika melakukan query yang sudah jelas Entity nya, sangat disarankan menggunakan `TypedQuery<T>`
+- Untuk NativeQuery hanya bisa menggunakan `Query` sebagai hasil return nya, tambahkan annotation `@SuppressWarnings("unchecked")` untuk menghilangkan warning
 - Untuk melakukan SELECT, tidak menggunakan nama kolom, tetapi menggunakan nama attribute, dan untuk SELECT all tidak menggunakan *, tetapi menggunakan alias nya saja
 
 ## Named Query
@@ -231,6 +232,12 @@
 - Named Query biasanya di tempatkan di Entity Class, menggunakan annotation `@NamedQuery` atau `@NamedQueries` jika lebih dari satu Named Query
 - Contohnya `@NamedQueries({ @NamedQuery(name = "aliasnya", query = "querynya") })`
 - Saat membuat alias nya, sebaiknya diikuti dengan nama Entity nya, agar tidak bentrok dengan alias dari Entity lain, karena Named Query bersifat global
+
+## Non Query
+- JPA QL bisa digunakan untuk membuat perintah Update dan Delete, dengan membuat query seperti biasa
+- Untuk execute query nya menggunakan method `query.executeUpdate()`
+- Bisa digunakan untuk JPA QL maupun Native Query
+- Namun untuk Update dan Delete tetap disarankan menggunakan `merge` dan `remove`
 
 
 ## Learning
