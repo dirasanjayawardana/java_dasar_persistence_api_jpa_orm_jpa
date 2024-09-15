@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.Member;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Brand;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.Product;
+import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.SimpleBrand;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.User;
 import com.dirapp.java_dasar_presistence_api_orm_jpa.util.JpaUtil;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class JpaQueryLangaugeTest {
 
     @Test
-    void select() {
+    void selectClause() {
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -59,7 +60,8 @@ public class JpaQueryLangaugeTest {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        TypedQuery<Product> query = entityManager.createQuery("select p from Product p join p.brand b where b.name = :brand", Product.class);
+        TypedQuery<Product> query = entityManager
+                .createQuery("select p from Product p join p.brand b where b.name = :brand", Product.class);
         query.setParameter("brand", "Samsung");
 
         List<Product> products = query.getResultList();
@@ -72,14 +74,16 @@ public class JpaQueryLangaugeTest {
     }
 
     @Test
-    void joinFetchClause() {
+    void joinFetchClause() { // melakukan JOIN sekaligus melakukan SELECT pada semua kolom di tabel termasuk
+                             // yg di JOIN
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        TypedQuery<User> query = entityManager.createQuery("select u from User u join fetch u.likes p where p.name = :product", User.class);
-        query.setParameter("product", "Samsung Galaxy 1");
+        TypedQuery<User> query = entityManager
+                .createQuery("select u from User u join fetch u.likes p where p.name = :product", User.class);
+        query.setParameter("product", "samsung123");
 
         List<User> users = query.getResultList();
         for (User user : users) {
@@ -136,8 +140,8 @@ public class JpaQueryLangaugeTest {
         entityTransaction.begin();
 
         TypedQuery<Brand> query = entityManager.createQuery("select b from Brand b order by b.id", Brand.class);
-        query.setFirstResult(10);
-        query.setMaxResults(10);
+        query.setFirstResult(3); // mengatur OFFSET nya
+        query.setMaxResults(10); // mengatur LIMIT nya
 
         List<Brand> brands = query.getResultList();
         for (Brand brand : brands) {
@@ -174,7 +178,8 @@ public class JpaQueryLangaugeTest {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        TypedQuery<Object[]> query = entityManager.createQuery("select b.id, b.name from Brand b where b.name = :name", Object[].class);
+        TypedQuery<Object[]> query = entityManager.createQuery("select b.id, b.name from Brand b where b.name = :name",
+                Object[].class);
         query.setParameter("name", "Xiaomi");
 
         List<Object[]> objects = query.getResultList();
@@ -186,25 +191,27 @@ public class JpaQueryLangaugeTest {
         entityManager.close();
     }
 
-    // @Test
-    // void selectNewConstructor() {
-    //     EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
-    //     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    //     EntityTransaction entityTransaction = entityManager.getTransaction();
-    //     entityTransaction.begin();
+    @Test
+    void selectNewConstructor() { // untuk melakukan SELECT beberapa kolom saja, namun agar tidak menggunakan Object[]
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
-    //     TypedQuery<SimpleBrand> query = entityManager.createQuery("select new programmerzamannow.jpa.entity.SimpleBrand(b.id, b.name) " +
-    //             "from Brand b where b.name = :name", SimpleBrand.class);
-    //     query.setParameter("name", "Xiaomi");
+        TypedQuery<SimpleBrand> query = entityManager.createQuery(
+                "select new com.dirapp.java_dasar_presistence_api_orm_jpa.entity.relations.SimpleBrand(b.id, b.name) " +
+                        "from Brand b where b.name = :name",
+                SimpleBrand.class);
+        query.setParameter("name", "Xiaomi");
 
-    //     List<SimpleBrand> simpleBrands = query.getResultList();
-    //     for (SimpleBrand simpleBrand : simpleBrands) {
-    //         System.out.println(simpleBrand.getId() + " : " + simpleBrand.getName());
-    //     }
+        List<SimpleBrand> simpleBrands = query.getResultList();
+        for (SimpleBrand simpleBrand : simpleBrands) {
+            System.out.println(simpleBrand.getId() + " : " + simpleBrand.getName());
+        }
 
-    //     entityTransaction.commit();
-    //     entityManager.close();
-    // }
+        entityTransaction.commit();
+        entityManager.close();
+    }
 
     @Test
     void aggregateQuery() {
@@ -213,7 +220,8 @@ public class JpaQueryLangaugeTest {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        TypedQuery<Object[]> query = entityManager.createQuery("select min(p.price), max(p.price), avg(p.price) from Product p", Object[].class);
+        TypedQuery<Object[]> query = entityManager
+                .createQuery("select min(p.price), max(p.price), avg(p.price) from Product p", Object[].class);
         Object[] result = query.getSingleResult();
 
         System.out.println("Min : " + result[0]);
@@ -231,8 +239,9 @@ public class JpaQueryLangaugeTest {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        TypedQuery<Object[]> query = entityManager.createQuery("select b.id, min(p.price), max(p.price), avg(p.price) from Product p join p.brand b " +
-                "group by b.id having min(p.price) > :min", Object[].class);
+        TypedQuery<Object[]> query = entityManager
+                .createQuery("select b.id, min(p.price), max(p.price), avg(p.price) from Product p join p.brand b " +
+                        "group by b.id having min(p.price) > :min", Object[].class);
         query.setParameter("min", 500_000L);
 
         List<Object[]> objects = query.getResultList();
@@ -254,7 +263,8 @@ public class JpaQueryLangaugeTest {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        Query query = entityManager.createNativeQuery("select * from brands where brands.created_at is not null", Brand.class);
+        Query query = entityManager.createNativeQuery("select * from brands where brands.created_at is not null",
+                Brand.class);
         List<Brand> brands = query.getResultList();
 
         for (Brand brand : brands) {

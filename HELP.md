@@ -225,6 +225,13 @@
 - Jika melakukan query yang sudah jelas Entity nya, sangat disarankan menggunakan `TypedQuery<T>`
 - Untuk melakukan SELECT, tidak menggunakan nama kolom, tetapi menggunakan nama attribute, dan untuk SELECT all tidak menggunakan *, tetapi menggunakan alias nya saja
 
+## Named Query
+- JPA memiliki fitur Named Query, digunakan untuk membuat alias untuk JPA QL yg dibuat
+- JPA QL cukup dibuat sekali dan memberikan alias nya, sehingga QL bisa digunakan berkali-kali hanya dengan menyebutkan nama aliasnya
+- Named Query biasanya di tempatkan di Entity Class, menggunakan annotation `@NamedQuery` atau `@NamedQueries` jika lebih dari satu Named Query
+- Contohnya `@NamedQueries({ @NamedQuery(name = "aliasnya", query = "querynya") })`
+- Saat membuat alias nya, sebaiknya diikuti dengan nama Entity nya, agar tidak bentrok dengan alias dari Entity lain, karena Named Query bersifat global
+
 
 ## Learning
 - test/EntityManagerFacotryTest.java
