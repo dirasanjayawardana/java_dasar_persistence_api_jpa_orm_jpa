@@ -239,6 +239,15 @@
 - Bisa digunakan untuk JPA QL maupun Native Query
 - Namun untuk Update dan Delete tetap disarankan menggunakan `merge` dan `remove`, karena fitur optimistic locking tidak akan berjalan
 
+## Criteria
+- Criteria adalah fitur di JPA untuk membuta JPA QL secara dinamis, tanpa menggunakan query, full dengan code java
+- Saat membuat Query dengan JPA, harus menentukan Query yang akan digunakan
+- CriteriaQuery digunakan untuk menambahkan informasi query yang akan dilakukan, seperti select dari entity mana, field apa yang akan diambil, kondisi where yg akan digunakan
+- Contoh kasus pada saat pencarian data, field/kolom yang ingin dicari sesuai inputan user
+- Untuk membuat `Criteria`, harus membuat `CriteriaBuilder` dengan `entityManager.getCriteriaBuilder()`
+- Setelah itu membuat `CriteriaQuery<EntityClass>` dengan `criteriaBuilder.createQuery()`
+- Untuk mengkonversi ke `Query` menggunakan `entityManager.createQuery(criteria)`
+- `Root<EntityClass>` sama seperti membuat alias di query
 
 ## Learning
 - test/EntityManagerFacotryTest.java
@@ -259,3 +268,4 @@
 - test/LockingTest.java
 - test/ManagedEntityTest.java
 - test/JpaQueryLanguageTest.java
+- test/CriteriaTest.java
